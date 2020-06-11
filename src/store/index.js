@@ -5,10 +5,18 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    tasks: JSON.parse(localStorage.getItem('tasks') || '[]')
   },
   mutations: {
+    createTask (state, task) {
+      state.tasks.push(task)
+    }
   },
   actions: {
+    createTask ({ commit, state }, task) {
+      commit('createTask', task)
+      localStorage.setItem('tasks', JSON.stringify(state.tasks))
+    }
   },
   modules: {
   }
