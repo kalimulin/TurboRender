@@ -18,7 +18,7 @@
         <td>{{idx + 1}}</td>
         <td>{{task.title}}</td>
         <td>{{new Date(task.date).toLocaleDateString()}}</td>
-        <td style="max-width: 400px"><div class="tasks-list__task-description">{{task.description}}</div></td>
+        <td style="max-width: 400px "><div class="tasks-list__task-description">{{task.description}}</div></td>
         <td>{{task.status}}</td>
         <td>
           <router-link tag="button" class="bnt btn-small" :to="`/task/${task.id}`">Open</router-link>

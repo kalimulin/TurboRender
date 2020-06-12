@@ -8,18 +8,27 @@ export default new Vuex.Store({
     tasks: JSON.parse(localStorage.getItem('tasks') || '[]')
   },
   getters: {
-    getTasks (state) {
-      return state.tasks
-    }
+    getTasks: state => state.tasks,
+    getTask: state => id => state.tasks.find(task => task.id === id)
   },
   mutations: {
-    createTask (state, task) {
+    createTask: (state, task) => {
       state.tasks.push(task)
+    },
+    updateTask: (state, task) => {
+      const tasks = [...state.tasks]
+      const idx = tasks.findIndex(t => t.id === task.id)
+      tasks[idx] = task
+      state.tasks = tasks
     }
   },
   actions: {
-    createTask ({ commit, state }, task) {
+    createTask: ({ commit, state }, task) => {
       commit('createTask', task)
+      localStorage.setItem('tasks', JSON.stringify(state.tasks))
+    },
+    updateTask: ({ commit, state }, task) => {
+      commit('updateTask', task)
       localStorage.setItem('tasks', JSON.stringify(state.tasks))
     }
   },
